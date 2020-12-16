@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.maciel.murillo.mutodo.modules.tasks.data.local.TaskDao
+import com.maciel.murillo.mutodo.modules.tasks.data.model.AlarmData
 import com.maciel.murillo.mutodo.modules.tasks.data.model.TaskData
 
 @Database(entities = [
@@ -15,7 +16,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
 
     companion object {
-        const val DATABASE_NAME = "MuTodo_Tasks_Database"
+        private const val DATABASE_NAME = "MuTodo_Tasks_Database"
 
         @Volatile private lateinit var INSTANCE: AppDatabase
 

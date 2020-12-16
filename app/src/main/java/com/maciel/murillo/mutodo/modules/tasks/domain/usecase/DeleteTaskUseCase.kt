@@ -3,7 +3,7 @@ package com.maciel.murillo.mutodo.modules.tasks.domain.usecase
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import com.maciel.murillo.mutodo.modules.tasks.domain.repository.TaskRepository
 
-class deleteTaskUseCase(private val repository: TaskRepository) {
+class DeleteTaskUseCase(private val repository: TaskRepository) {
 
     suspend operator fun invoke(task: Task) {
         repository.delete(task.id)

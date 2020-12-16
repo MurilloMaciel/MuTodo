@@ -60,10 +60,10 @@ fun getInitialAlarm(): Calendar {
     var hour = currentTime.get(Calendar.HOUR_OF_DAY)
     val minute = currentTime.get(Calendar.MINUTE)
 
-    if (minute >= 0 && minute < 30) {
+    if (minute in 0..29) {
         currentTime.set(Calendar.MINUTE, 30)
 
-    } else if (minute >= 30 && minute <= 59) {
+    } else if (minute in 30..59) {
 
         currentTime.set(Calendar.MINUTE, 0)
 

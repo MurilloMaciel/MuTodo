@@ -6,9 +6,12 @@ import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.RepeatType
 
 data class AlarmData(
-        var repeatType: Int = 0,
-        var nextAlarmDate: String?,
-        var customDays: String?
+//        @ColumnInfo(name = "repeatType") var repeatType: Int = 0,
+//        @ColumnInfo(name = "nextAlarmDate") var nextAlarmDate: String?,
+//        @ColumnInfo(name = "customDays") var customDays: String?
+        val repeatType: Int = 0,
+        val nextAlarmDate: String?,
+        val customDays: String?
 )
 
 fun AlarmData.mapToAlarm() = Alarm(

@@ -15,14 +15,15 @@ interface TaskDao {
     @Update
     suspend fun update(task: TaskData)
 
-    @Delete
+    @Query("DELETE FROM TaskData WHERE id = :id")
     suspend fun delete(id: Long)
 
-    @Transaction
+//    @Delete
+//    suspend fun delete(id: Long)
+
     @Query("SELECT * FROM TaskData")
     suspend fun findAll(): List<TaskData>
 
-    @Transaction
     @Query("SELECT * FROM TaskData WHERE id = :id")
     suspend fun findById(id: Long): TaskData
 }

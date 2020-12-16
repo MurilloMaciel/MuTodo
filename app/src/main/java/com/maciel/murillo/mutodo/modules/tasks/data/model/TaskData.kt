@@ -17,7 +17,7 @@ data class TaskData(
         @ColumnInfo(name = "title") val title: String?,
         @ColumnInfo(name = "description") val description: String?,
         @ColumnInfo(name = "insertingDate") val insertingDate: String? = null,
-        @Embedded @ColumnInfo(name = "alarm") val alarm: AlarmData? = null,
+        @Embedded val alarm: AlarmData? = null,
         @ColumnInfo(name = "enabled") val enabled: Boolean = true,
 )
 
