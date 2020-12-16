@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/nav_tasks">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.maciel.murillo.mutodo.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:id="@+id/nav_settings"
+        android:name="com.maciel.murillo.mutodo.modules.settings.SettingsFragment"
+        android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.maciel.murillo.mutodo.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/nav_about"
+        android:name="com.maciel.murillo.mutodo.modules.about.AboutFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.maciel.murillo.mutodo.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/nav_tasks"
+        android:name="com.maciel.murillo.mutodo.modules.tasks.presentation.TasksFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
 </navigation>
