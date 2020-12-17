@@ -1,4 +1,4 @@
-package com.maciel.murillo.mutodo.core.presentation.base
+package com.maciel.murillo.mutodo.core.domain.base
 
 abstract class BaseEntity {
     abstract var id: Long

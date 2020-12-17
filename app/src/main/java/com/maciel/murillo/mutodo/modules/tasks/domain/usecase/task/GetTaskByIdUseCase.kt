@@ -1,4 +1,4 @@
-package com.maciel.murillo.mutodo.modules.tasks.domain.usecase
+package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task
 
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import com.maciel.murillo.mutodo.modules.tasks.domain.repository.TaskRepository

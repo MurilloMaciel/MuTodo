@@ -6,8 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.maciel.murillo.mutodo.core.extensions.safe
 import com.maciel.murillo.mutodo.core.extensions.toDateTimeString
-import com.maciel.murillo.mutodo.core.presentation.base.BaseEntity
-import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
+import com.maciel.murillo.mutodo.core.domain.base.BaseEntity
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import java.util.*
 

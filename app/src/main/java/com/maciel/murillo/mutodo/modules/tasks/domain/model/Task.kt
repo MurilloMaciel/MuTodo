@@ -1,6 +1,6 @@
 package com.maciel.murillo.mutodo.modules.tasks.domain.model
 
-import com.maciel.murillo.mutodo.core.presentation.base.BaseEntity
+import com.maciel.murillo.mutodo.core.domain.base.BaseEntity
 
 data class Task(
         override var id: Long = NO_ID,

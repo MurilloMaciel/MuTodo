@@ -17,7 +17,7 @@ data class AlarmData(
 fun AlarmData.mapToAlarm() = Alarm(
         dateTime = nextAlarmDate!!.toDateTimeCalendar(),
         repeatType = RepeatType.indexOf(repeatType),
-        customDays = customDays
+        customDays = customDays,
 )
 
 fun Alarm.mapToAlarmData() = AlarmData(

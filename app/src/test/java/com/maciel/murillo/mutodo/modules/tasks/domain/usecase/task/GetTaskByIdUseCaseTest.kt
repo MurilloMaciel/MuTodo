@@ -1,7 +1,8 @@
-package com.maciel.murillo.mutodo.modules.tasks.domain.usecase
+package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task
 
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import com.maciel.murillo.mutodo.modules.tasks.domain.repository.TaskRepository
+import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task.GetTaskByIdUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.confirmVerified
@@ -11,19 +12,19 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class InsertTaskUseCaseTest {
+class GetTaskByIdUseCaseTest {
 
     private val repository: TaskRepository = mockk(relaxed = true)
 
-    private lateinit var insertTaskUseCase: InsertTaskUseCase
+    private lateinit var getTaskByIdUseCase: GetTaskByIdUseCase
 
     @Before
     fun setUp() {
-        insertTaskUseCase = InsertTaskUseCase(repository)
+        getTaskByIdUseCase = GetTaskByIdUseCase(repository)
     }
 
     @Test
-    fun `should insert task from repository`() = runBlocking {
+    fun `should get task from repository`() = runBlocking {
         val id = 10L
         val task = Task(
                 id = id,
@@ -33,12 +34,12 @@ class InsertTaskUseCaseTest {
                 insertingDate = "date",
                 enabled = false,
         )
-        coEvery { repository.insert(task) } returns Unit
+        coEvery { repository.findById(id) } returns task
 
-        val result = insertTaskUseCase.invoke(task)
+        val result = getTaskByIdUseCase.invoke(id)
 
-        coVerify { repository.insert(task) }
+        coVerify { repository.findById(id) }
         confirmVerified(repository)
-        assertEquals(result, Unit)
+        assertEquals(result, task)
     }
 }

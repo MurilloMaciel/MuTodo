@@ -11,4 +11,11 @@
     <string name="menu_home">Settings</string>
     <string name="menu_gallery">About</string>
     <string name="menu_slideshow">Tasks</string>
+
+<!--    notification-->
+    <string name="tasks_to_do">MuTodo</string>
+    <string name="touch_to_check">Toque para visualizar</string>
+    <string name="notification_title_task_alarms">Tarefa</string>
+    <string name="new_task">Nova Tarefa</string>
+
 </resources>
