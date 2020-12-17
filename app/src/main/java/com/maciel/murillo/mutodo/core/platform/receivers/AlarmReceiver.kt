@@ -15,6 +15,8 @@ import com.maciel.murillo.mutodo.R
 import com.maciel.murillo.mutodo.core.extensions.isBeforeNow
 import com.maciel.murillo.mutodo.core.extensions.safe
 import com.maciel.murillo.mutodo.core.helper.NotificationHelper
+import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetAlarmSoundUseCase
+import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetAlarmVibrateUseCase
 import com.maciel.murillo.mutodo.modules.splash.presentation.SplashActivity
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.TaskCategory
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.TaskFilter
@@ -35,8 +37,8 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
     private val getTaskByIdUseCase: GetTaskByIdUseCase by inject()
     private val getAllTasksUseCase: GetAllTasksUseCase by inject()
-//    val getAlarmSoundSetting: GetAlarmSoundSetting by inject()
-//    val getAlarmVibrateSetting: GetAlarmVibrateSetting by inject()
+    private val getAlarmSoundUseCase: GetAlarmSoundUseCase by inject()
+    private val getAlarmVibrateUseCase: GetAlarmVibrateUseCase by inject()
 
     override fun onReceive(context: Context, intent: Intent) {
         GlobalScope.launch(Dispatchers.Main) {
@@ -71,10 +73,10 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
         initContentTextAndTitle(context, intent, builder)
 
-//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-//            initVibrate(builder)
-//            getAlarmSoundSetting()?.run { builder.setSound(this) }
-//        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            initVibrate(builder)
+            getAlarmSoundUseCase.invoke()?.run { builder.setSound(this) }
+        }
 
         return builder
     }
@@ -112,11 +114,11 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
     }
 
     private suspend fun initVibrate(builder: NotificationCompat.Builder) {
-//        if (getAlarmVibrateSetting()) {
-//            builder.setDefaults(NotificationCompat.DEFAULT_VIBRATE or NotificationCompat.DEFAULT_LIGHTS)
-//        } else {
-//            builder.setDefaults(NotificationCompat.DEFAULT_LIGHTS)
-//        }
+        if (getAlarmVibrateUseCase.invoke()) {
+            builder.setDefaults(NotificationCompat.DEFAULT_VIBRATE or NotificationCompat.DEFAULT_LIGHTS)
+        } else {
+            builder.setDefaults(NotificationCompat.DEFAULT_LIGHTS)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

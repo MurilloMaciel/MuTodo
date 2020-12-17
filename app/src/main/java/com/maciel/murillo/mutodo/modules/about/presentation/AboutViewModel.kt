@@ -1,4 +1,4 @@
-package com.maciel.murillo.mutodo.modules.about
+package com.maciel.murillo.mutodo.modules.about.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

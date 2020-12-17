@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.maciel.murillo.mutodo.modules.settings.SettingsFragment"
+        android:name="com.maciel.murillo.mutodo.modules.settings.presentation.SettingsFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.maciel.murillo.mutodo.modules.about.AboutFragment"
+        android:name="com.maciel.murillo.mutodo.modules.about.presentation.AboutFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 

@@ -1,4 +1,4 @@
-package com.maciel.murillo.mutodo.modules.settings
+package com.maciel.murillo.mutodo.modules.settings.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
