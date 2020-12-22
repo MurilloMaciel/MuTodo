@@ -148,3 +148,16 @@ fun Calendar.setFinalTimeToCalendar(): Calendar {
 
     return this
 }
+
+fun Calendar.getDateToString(): String {
+    val year = this.get(Calendar.YEAR).toString().fiilWithDefaultText(4, "0")
+    val month = (this.get(Calendar.MONTH)+1).toString().fiilWithDefaultText(2, "0")
+    val day = this.get(Calendar.DAY_OF_MONTH).toString().fiilWithDefaultText(2, "0")
+    return "$year/$month/$day"
+}
+
+fun Calendar.getTimeToString(): String {
+    val hour = this.get(Calendar.HOUR_OF_DAY).toString().fiilWithDefaultText(2, "0")
+    val minute = this.get(Calendar.MINUTE).toString().fiilWithDefaultText(2, "0")
+    return "$hour:$minute"
+}

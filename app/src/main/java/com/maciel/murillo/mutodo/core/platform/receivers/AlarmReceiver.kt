@@ -17,9 +17,7 @@ import com.maciel.murillo.mutodo.core.extensions.safe
 import com.maciel.murillo.mutodo.core.helper.NotificationHelper
 import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetAlarmSoundUseCase
 import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetAlarmVibrateUseCase
-import com.maciel.murillo.mutodo.modules.splash.presentation.SplashActivity
-import com.maciel.murillo.mutodo.modules.tasks.domain.model.TaskCategory
-import com.maciel.murillo.mutodo.modules.tasks.domain.model.TaskFilter
+import com.maciel.murillo.mutodo.modules.splash.presentation.SplashFragment
 import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task.GetAllTasksUseCase
 import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task.GetTaskByIdUseCase
 import kotlinx.coroutines.Dispatchers
@@ -60,7 +58,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
     }
 
     private suspend fun buildNotification(context: Context, intent: Intent): NotificationCompat.Builder {
-        val resultIntent = Intent(context, SplashActivity::class.java)
+        val resultIntent = Intent(context, SplashFragment::class.java)
         val resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID_ALARM)
@@ -109,7 +107,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
     }
 
     private fun setTextAndTitleFromList(context: Context, builder: NotificationCompat.Builder, tasksQuantity: Int) {
-        builder.setContentTitle(tasksQuantity.toString() + " " + context.getString(R.string.action_settings))
+        builder.setContentTitle(tasksQuantity.toString() + " " + context.getString(R.string.notification_title_task_alarms))
         builder.setContentText(context.getString(R.string.touch_to_check))
     }
 

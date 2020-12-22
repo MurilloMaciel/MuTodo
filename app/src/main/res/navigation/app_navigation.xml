@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/frag_splash">
+
+    <fragment
+        android:id="@+id/frag_splash"
+        android:name="com.maciel.murillo.mutodo.modules.splash.presentation.SplashFragment"
+        tools:layout="@layout/fragment_splash">
+
+        <action
+            android:id="@+id/goToCategoriesFrag"
+            app:destination="@id/frag_categories"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/app_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/frag_categories"
+        android:name="com.maciel.murillo.mutodo.modules.categories.presentation.CategoriesFragment"
+        tools:layout="@layout/fragment_categories">
+
+        <action
+            android:id="@+id/goToTasksFrag"
+            app:destination="@id/frag_tasks"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/frag_categories" />
+
+        <action
+            android:id="@+id/goToSettingsFrag"
+            app:destination="@id/frag_settings"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/frag_categories" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/frag_tasks"
+        android:name="com.maciel.murillo.mutodo.modules.tasks.presentation.TasksFragment"
+        tools:layout="@layout/fragment_tasks">
+
+        <argument
+            android:name="category"
+            app:argType="com.maciel.murillo.mutodo.modules.categories.presentation.model.CategoryTypePresentation"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/goToAddTaskFrag"
+            app:destination="@id/frag_add_task"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/frag_tasks" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/frag_add_task"
+        android:name="com.maciel.murillo.mutodo.modules.tasks.presentation.addtask.AddTaskFragment"
+        tools:layout="@layout/fragment_add_task">
+
+        <argument
+            android:name="category"
+            app:argType="com.maciel.murillo.mutodo.modules.categories.presentation.model.CategoryTypePresentation"
+            app:nullable="false" />
+
+        <argument
+            android:name="taskId"
+            app:argType="long"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/frag_settings"
+        android:name="com.maciel.murillo.mutodo.modules.settings.presentation.SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+</navigation>

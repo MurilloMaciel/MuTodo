@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class CardBindingBaseAct<B : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseBindingActivity<B : ViewDataBinding> : AppCompatActivity() {
 
     abstract val layoutId: Int
 
@@ -15,7 +15,7 @@ abstract class CardBindingBaseAct<B : ViewDataBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         (DataBindingUtil.setContentView(this, layoutId) as? B)?.apply {
-            lifecycleOwner = this@CardBindingBaseAct
+            lifecycleOwner = this@BaseBindingActivity
             loadVm(this)
         }
 

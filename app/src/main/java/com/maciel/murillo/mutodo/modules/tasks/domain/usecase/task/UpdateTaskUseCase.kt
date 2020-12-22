@@ -1,6 +1,7 @@
 package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task
 
 import com.maciel.murillo.mutodo.core.extensions.isNull
+import com.maciel.murillo.mutodo.core.extensions.safe
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import com.maciel.murillo.mutodo.modules.tasks.domain.repository.TaskRepository
 import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.alarm.CancelAlarmScheduleUseCase
@@ -15,7 +16,7 @@ class UpdateTaskUseCase(private val repository: TaskRepository,
         repository.update(task)
 
         if (task.alarm.isNull()) {
-            cancelAlarmScheduleUseCase.invoke(task.id)
+            cancelAlarmScheduleUseCase.invoke(task.id.safe())
         } else {
             scheduleAlarmUpdateUseCase.invoke()
         }

@@ -1,6 +1,7 @@
 package com.maciel.murillo.mutodo.core.extensions
 
 import android.annotation.SuppressLint
+import android.util.Log
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.text.Normalizer
@@ -62,4 +63,8 @@ fun String.fiilWithDefaultText(digitsToFill: Int, fillChar: String = "X"): Strin
         aux--
     }
     return this + filledString
+}
+
+fun String.log() {
+    Log.d("Murillo", this)
 }

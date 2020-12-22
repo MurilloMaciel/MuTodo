@@ -9,6 +9,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".Application"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -31,9 +32,9 @@
             android:name=".modules.RootActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.MuTodo.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

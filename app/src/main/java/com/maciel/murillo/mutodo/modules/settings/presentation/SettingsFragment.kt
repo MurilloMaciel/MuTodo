@@ -1,24 +1,16 @@
 package com.maciel.murillo.mutodo.modules.settings.presentation
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.maciel.murillo.mutodo.R
+import com.maciel.murillo.mutodo.core.presentation.base.BaseBindingFragment
+import com.maciel.murillo.mutodo.databinding.FragmentSettingsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseBindingFragment<FragmentSettingsBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        return root
-    }
+    override val layoutId = R.layout.fragment_settings
+
+    override val loadVm: (FragmentSettingsBinding) -> Unit = { it.vm = settingsViewModel }
+
+    private val settingsViewModel: SettingsViewModel by viewModel()
+
 }

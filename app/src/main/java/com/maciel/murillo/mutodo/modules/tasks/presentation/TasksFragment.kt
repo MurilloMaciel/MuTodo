@@ -1,24 +1,79 @@
 package com.maciel.murillo.mutodo.modules.tasks.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.maciel.murillo.mutodo.R
+import com.maciel.murillo.mutodo.core.helper.EventObserver
+import com.maciel.murillo.mutodo.core.presentation.base.BaseBindingFragment
+import com.maciel.murillo.mutodo.databinding.FragmentTasksBinding
+import com.maciel.murillo.mutodo.modules.categories.presentation.model.CategoryTypePresentation
+import com.maciel.murillo.mutodo.modules.categories.presentation.model.getCategoryNameResource
+import com.maciel.murillo.mutodo.modules.categories.presentation.model.mapToCategoryType
+import kotlinx.android.synthetic.main.fragment_tasks.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TasksFragment : Fragment() {
+class TasksFragment : BaseBindingFragment<FragmentTasksBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
-        return root
+    override val layoutId = R.layout.fragment_tasks
+
+    override val loadVm: (FragmentTasksBinding) -> Unit = { it.vm = tasksViewModel }
+
+    private val tasksViewModel: TasksViewModel by viewModel()
+
+    private val arguments: TasksFragmentArgs by navArgs()
+    private val taskCategoryType: CategoryTypePresentation by lazy { arguments.category }
+
+    private val navController by lazy { findNavController() }
+
+    private lateinit var tasksAdapter: TasksAdapter
+
+    override fun onResume() {
+        super.onResume()
+
+        tasksViewModel.onInitializeScreen(taskCategoryType.mapToCategoryType())
+    }
+
+    override fun setUpView(view: View, savedInstanceState: Bundle?) {
+        super.setUpView(view, savedInstanceState)
+
+        tasksAdapter = TasksAdapter(
+            tasks = tasksViewModel.tasks,
+            callback = object : TasksListener {
+                override fun onClickEdit(position: Int) = tasksViewModel.onClickEditTask(position)
+                override fun onClickDelete(position: Int) = tasksViewModel.onClickDeleteTask(position)
+            }
+        )
+
+        rv_tasks.adapter = tasksAdapter
+
+        tv_category.text = getString(taskCategoryType.getCategoryNameResource())
+    }
+
+    override fun setUpObservers() {
+        super.setUpObservers()
+
+        setUpdateTasksObserver()
+        setGoBackObserver()
+        setAddTaskObserver()
+    }
+
+    private fun setUpdateTasksObserver() {
+        tasksViewModel.updateTasks.observe(viewLifecycleOwner, EventObserver {
+            tasksAdapter.setTasks(tasksViewModel.tasks)
+        })
+    }
+
+    private fun setGoBackObserver() {
+        tasksViewModel.goBack.observe(viewLifecycleOwner, EventObserver {
+            activity?.onBackPressed()
+        })
+    }
+
+    private fun setAddTaskObserver() {
+        tasksViewModel.addOrUpdateTask.observe(viewLifecycleOwner, EventObserver { taskId ->
+            navController.navigate(TasksFragmentDirections.goToAddTaskFrag(taskCategoryType, taskId ?: -1L))
+        })
     }
 }

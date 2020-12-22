@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.maciel.murillo.mutodo.modules.tasks.presentation.addtask.AddTaskViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_light"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="48dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="36dp"
+            android:onClick="@{() -> vm.onBackClick()}"
+            android:src="@drawable/ic_back_36"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_add_task"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_add_task" />
+
+        <TextView
+            android:id="@+id/tv_add_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/add_task"
+            android:textColor="@color/gray_dark_1"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_task_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginTop="24dp"
+            android:textColorHint="@color/gray_dark_1"
+            android:theme="@style/TextLabel"
+            app:hintTextColor="@color/gray_dark_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_add_task">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_task_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:hint="@string/add_task_title_hint"
+                android:imeOptions="actionDone"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@{vm.taskTitle}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_task_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginTop="24dp"
+            android:textColorHint="@color/gray_dark_1"
+            android:theme="@style/TextLabel"
+            app:hintTextColor="@color/gray_dark_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_task_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_task_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:hint="@string/add_task_description_hint"
+                android:imeOptions="actionDone"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@{vm.taskDescription}"
+                android:textColor="@color/gray_dark_1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_enable_alarm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_enable_alarm"
+            android:textColor="@color/gray_dark_1"
+            android:button="@null"
+            android:checked="@={vm.alarmEnabled}"
+            android:gravity="center"
+            android:minHeight="55dp"
+            android:text="@{vm.alarmEnabled ? @string/add_alarm_checked : @string/add_alarm_unchecked}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_task_description"
+            tools:text="@string/add_alarm_checked"/>
+
+        <View
+            android:id="@+id/v_alarm_enable_divider"
+            android:layout_width="0dp"
+            android:layout_height="0.6dp"
+            android:layout_marginHorizontal="36dp"
+            android:background="@color/gray_dark_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_enable_alarm" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_add_alarm_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:background="@drawable/bg_add_alarm_form"
+            android:padding="16dp"
+            android:visibility="@{vm.alarmEnabled.booleanValue() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_alarm_enable_divider">
+
+            <TextView
+                android:id="@+id/tv_alarm_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:onClick="@{() -> vm.onClickDate()}"
+                android:text="@{vm.alarmDate}"
+                android:textColor="@color/gray_dark_1"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="aaaa/mm/dd" />
+
+            <TextView
+                android:id="@+id/tv_alarm_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:onClick="@{() -> vm.onClickTime()}"
+                android:text="@{vm.alarmTime}"
+                android:textColor="@color/gray_dark_1"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_alarm_date"
+                tools:text="hh:hh" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:checked="@={vm.alarmRepeatAlwaysEnabled}"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/gray_dark_1"
+                android:textSize="16sp"
+                android:text="@string/alarm_repeat_all_days"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_alarm_hour"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_submit"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_submit_button"
+            android:enabled="@{vm.submitEnabled.booleanValue()}"
+            android:onClick="@{() -> vm.onSubmitClick()}"
+            android:text="@string/add_task_submit"
+            android:textColor="@color/white_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

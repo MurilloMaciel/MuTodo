@@ -1,11 +1,11 @@
 package com.maciel.murillo.mutodo.core.domain.base
 
 abstract class BaseEntity {
-    abstract var id: Long
+    abstract var id: Long?
 
     companion object {
-        const val NO_ID: Long = -1
+        val NO_ID = null
     }
 
-    fun hasId() = id > NO_ID
+    fun hasId() = id != NO_ID
 }

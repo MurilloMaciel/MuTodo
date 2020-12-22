@@ -21,8 +21,11 @@ interface TaskDao {
 //    @Delete
 //    suspend fun delete(id: Long)
 
-    @Query("SELECT * FROM TaskData")
+    @Query("SELECT * FROM TaskData ORDER BY id ASC")
     suspend fun findAll(): List<TaskData>
+
+    @Query("SELECT * FROM TaskData WHERE TaskData.categoryType = :categoryType ORDER BY id ASC")
+    suspend fun findAllByCategory(categoryType: String): List<TaskData>
 
     @Query("SELECT * FROM TaskData WHERE id = :id")
     suspend fun findById(id: Long): TaskData

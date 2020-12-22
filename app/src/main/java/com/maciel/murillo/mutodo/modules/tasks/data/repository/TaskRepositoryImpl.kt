@@ -1,5 +1,7 @@
 package com.maciel.murillo.mutodo.modules.tasks.data.repository
 
+import com.maciel.murillo.mutodo.modules.categories.data.model.toEnumString
+import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
 import com.maciel.murillo.mutodo.modules.tasks.data.datasource.TaskLocalDatasource
 import com.maciel.murillo.mutodo.modules.tasks.data.model.mapToTask
 import com.maciel.murillo.mutodo.modules.tasks.data.model.mapToTaskData
@@ -17,6 +19,8 @@ class TaskRepositoryImpl(private val localDatasource: TaskLocalDatasource) : Tas
     override suspend fun delete(id: Long) = localDatasource.delete(id)
 
     override suspend fun findAll(): List<Task> = localDatasource.findAll().map { taskData -> taskData.mapToTask() }
+
+    override suspend fun findAllByCategory(categoryType: CategoryType): List<Task> = localDatasource.findAllByCategory(categoryType.toEnumString()).map { taskData -> taskData.mapToTask() }
 
     override suspend fun findById(id: Long): Task = localDatasource.findById(id).mapToTask()
 }

@@ -1,21 +1,50 @@
 <resources>
     <string name="app_name">MuTodo</string>
+    <string name="app_description">Gerenciamento de tarefas</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Settings</string>
-    <string name="menu_gallery">About</string>
-    <string name="menu_slideshow">Tasks</string>
+    <string name="today">Hoje</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="pattern_month_day_short">dd \'de\' MMM</string>
+    <string name="pattern_month_day_long">dd \'de\' MMMM</string>
 
 <!--    notification-->
     <string name="tasks_to_do">MuTodo</string>
     <string name="touch_to_check">Toque para visualizar</string>
     <string name="notification_title_task_alarms">Tarefa</string>
     <string name="new_task">Nova Tarefa</string>
+
+<!--    categories-->
+    <string name="welcome">Olá {name}</string>
+    <string name="all_tasks_remaining">{count} itens pendentes</string>
+    <string name="tasks_remaining">{count} tarefas</string>
+    <string name="all_category_title">Todas</string>
+    <string name="work_category_title">Trabalho</string>
+    <string name="studies_category_title">Estudos</string>
+    <string name="general_category_title">Gerais</string>
+    <string name="fun_category_title">Diversão</string>
+    <string name="personal_category_title">Pessoal</string>
+    <string name="gym_category_title">Exercícios</string>
+
+<!--    task-->
+    <string name="add_tasks">Adicionar tarefas</string>
+    <string name="tasks_title">Tarefas</string>
+<!--    <string name=""></string>-->
+
+<!--    add task-->
+    <string name="add_task">Adicionar tarefa</string>
+    <string name="add_task_title_hint">Título</string>
+    <string name="add_task_description_hint">Descrição</string>
+    <string name="add_task_submit">SALVAR</string>
+    <string name="add_alarm_unchecked">Alarme desabilitado</string>
+    <string name="add_alarm_checked">Alarme habilitado</string>
+    <string name="alarm_repeat_initial_text">Sem repetição</string>
+    <string name="alarm_repeat_all_days">Repetir todos os dias</string>
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+
+<!--    settings-->
+    <!--    <string name=""></string>-->
 
 </resources>

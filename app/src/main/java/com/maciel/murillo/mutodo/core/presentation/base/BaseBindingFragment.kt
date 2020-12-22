@@ -23,9 +23,10 @@ abstract class BaseBindingFragment<B : ViewDataBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpViewModels()
         setUpView(view, savedInstanceState)
+        setUpViewModels()
         setUpObservers()
+        setUpListeners()
     }
 
     open fun setUpView(view: View, savedInstanceState: Bundle?) {}
@@ -33,6 +34,8 @@ abstract class BaseBindingFragment<B : ViewDataBinding> : Fragment() {
     open fun setUpViewModels() {}
 
     open fun setUpObservers() {}
+
+    open fun setUpListeners() {}
 
     fun hideKeyboard() = activity?.hideKeyboard()
 }

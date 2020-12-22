@@ -2,6 +2,7 @@ package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.alarm
 
 import com.maciel.murillo.mutodo.core.extensions.isAfterNow
 import com.maciel.murillo.mutodo.core.extensions.isBeforeNow
+import com.maciel.murillo.mutodo.core.extensions.safe
 import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task.GetAllTasksUseCase
 
 class ScheduleAllAlarmsUseCase(private val getAllTasksUseCase: GetAllTasksUseCase,
@@ -20,7 +21,7 @@ class ScheduleAllAlarmsUseCase(private val getAllTasksUseCase: GetAllTasksUseCas
                 }
 
                 if (alarm.dateTime.isAfterNow()) {
-                    scheduleAlarmUseCase.invoke(alarm, task.id)
+                    scheduleAlarmUseCase.invoke(alarm, task.id.safe())
                 }
             }
         }
