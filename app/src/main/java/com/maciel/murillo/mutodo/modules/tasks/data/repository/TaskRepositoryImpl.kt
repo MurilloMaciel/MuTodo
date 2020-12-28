@@ -16,7 +16,7 @@ class TaskRepositoryImpl(private val localDatasource: TaskLocalDatasource) : Tas
 
     override suspend fun update(task: Task) = localDatasource.update(task.mapToTaskData())
 
-    override suspend fun delete(id: Long) = localDatasource.delete(id)
+    override suspend fun delete(task: Task) = localDatasource.delete(task.mapToTaskData())
 
     override suspend fun findAll(): List<Task> = localDatasource.findAll().map { taskData -> taskData.mapToTask() }
 

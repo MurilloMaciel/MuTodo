@@ -1,16 +1,18 @@
 package com.maciel.murillo.mutodo.modules.tasks.data.repository
 
 import com.maciel.murillo.mutodo.modules.tasks.data.datasource.AlarmLocalDatasource
-import com.maciel.murillo.mutodo.modules.tasks.data.model.mapToAlarmData
-import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
+import com.maciel.murillo.mutodo.modules.tasks.data.model.mapToTaskData
+import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import com.maciel.murillo.mutodo.modules.tasks.domain.repository.AlarmRepository
 import java.util.*
 
 class AlarmRepositoryImpl(private val localDatasource: AlarmLocalDatasource) : AlarmRepository {
 
-    override suspend fun scheduleAlarm(alarm: Alarm, taskId: Long) = localDatasource.scheduleAlarm(alarm.mapToAlarmData(), taskId)
+    override suspend fun scheduleAlarm(task: Task) = localDatasource.scheduleAlarm(task.mapToTaskData())
 
-    override suspend fun updateAlarm(calendar: Calendar) = localDatasource.updateAlarm(calendar)
+    override suspend fun scheduleAlarmUpdates(calendar: Calendar) = localDatasource.scheduleAlarmUpdates(calendar)
 
-    override suspend fun cancelAlarm(taskId: Long) = localDatasource.cancelAlarm(taskId)
+    override suspend fun cancelAlarm(task: Task) = localDatasource.cancelAlarm(task.mapToTaskData())
+
+    override suspend fun updateAlarmSchedule(task: Task) = localDatasource.scheduleAlarm(task.mapToTaskData())
 }

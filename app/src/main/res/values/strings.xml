@@ -10,8 +10,9 @@
 
 <!--    notification-->
     <string name="tasks_to_do">MuTodo</string>
+    <string name="most_recently_task">Tarefa mais recente:</string>
     <string name="touch_to_check">Toque para visualizar</string>
-    <string name="notification_title_task_alarms">Tarefa</string>
+    <string name="notification_title_task_alarms">Tarefas</string>
     <string name="new_task">Nova Tarefa</string>
 
 <!--    categories-->
@@ -29,6 +30,7 @@
 <!--    task-->
     <string name="add_tasks">Adicionar tarefas</string>
     <string name="tasks_title">Tarefas</string>
+    <string name="no_alarm_scheduled">Nenhum alarme agendado</string>
 <!--    <string name=""></string>-->
 
 <!--    add task-->

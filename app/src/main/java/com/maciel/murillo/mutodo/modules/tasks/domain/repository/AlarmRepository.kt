@@ -1,13 +1,15 @@
 package com.maciel.murillo.mutodo.modules.tasks.domain.repository
 
-import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
+import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import java.util.*
 
 interface AlarmRepository {
 
-    suspend fun scheduleAlarm(alarm: Alarm, taskId: Long)
+    suspend fun scheduleAlarm(task: Task)
 
-    suspend fun updateAlarm(calendar: Calendar)
+    suspend fun scheduleAlarmUpdates(calendar: Calendar)
 
-    suspend fun cancelAlarm(taskId: Long)
+    suspend fun cancelAlarm(task: Task)
+
+    suspend fun updateAlarmSchedule(task: Task)
 }

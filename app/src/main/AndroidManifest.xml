@@ -30,7 +30,6 @@
 
         <activity
             android:name=".modules.RootActivity"
-            android:label="@string/title_activity_main"
             android:theme="@style/Theme.MuTodo.NoActionBar">
 
             <intent-filter>

@@ -17,7 +17,7 @@ class TaskLocalDatasourceImpl(private val context: Context) : TaskLocalDatasourc
 
     override suspend fun update(task: TaskData) = AppDatabase.getInstance(context).taskDao().update(task)
 
-    override suspend fun delete(id: Long) = AppDatabase.getInstance(context).taskDao().delete(id)
+    override suspend fun delete(task: TaskData) = AppDatabase.getInstance(context).taskDao().delete(task)
 
     override suspend fun findAll(): List<TaskData> = AppDatabase.getInstance(context).taskDao().findAll()
 

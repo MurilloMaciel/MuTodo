@@ -7,6 +7,6 @@ class ScheduleAlarmUpdateUseCase(private val alarmRepository: AlarmRepository) {
 
     suspend operator fun invoke() {
         val calendar = getInitialCalendarForTomorrow()
-        alarmRepository.updateAlarm(calendar)
+        alarmRepository.scheduleAlarmUpdates(calendar)
     }
 }

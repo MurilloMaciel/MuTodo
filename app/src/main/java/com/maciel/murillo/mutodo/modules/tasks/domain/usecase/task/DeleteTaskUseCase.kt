@@ -9,7 +9,7 @@ class DeleteTaskUseCase(private val repository: TaskRepository,
                         private val cancelAlarmScheduleUseCase: CancelAlarmScheduleUseCase) {
 
     suspend operator fun invoke(task: Task) {
-        repository.delete(task.id.safe())
-        task.alarm?.run {  cancelAlarmScheduleUseCase.invoke(task.id.safe()) }
+        repository.delete(task)
+        task.alarm?.run {  cancelAlarmScheduleUseCase.invoke(task) }
     }
 }

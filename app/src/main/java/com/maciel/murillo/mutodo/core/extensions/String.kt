@@ -55,14 +55,14 @@ fun String?.containsIgnoringAccentAndCase(src: String): Boolean? {
     return removeAccents()?.contains(src.removeAccents().safe(), true)
 }
 
-fun String.fiilWithDefaultText(digitsToFill: Int, fillChar: String = "X"): String {
+fun String.fiilWithDefaultText(digitsToFill: Int, fillChar: String = "X", rightToLeft: Boolean = true): String {
     var aux = digitsToFill
     var filledString = ""
     while ((aux - this.length) > 0) {
         filledString += fillChar
         aux--
     }
-    return this + filledString
+    return if (rightToLeft) (filledString + this) else (this + filledString)
 }
 
 fun String.log() {

@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.maciel.murillo.mutodo.R
@@ -18,6 +17,7 @@ import com.maciel.murillo.mutodo.core.helper.NotificationHelper
 import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetAlarmSoundUseCase
 import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetAlarmVibrateUseCase
 import com.maciel.murillo.mutodo.modules.splash.presentation.SplashFragment
+import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task.GetAllTasksUseCase
 import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task.GetTaskByIdUseCase
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +52,13 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
     private suspend fun throwNotification(context: Context, builder: NotificationCompat.Builder) {
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationManager.makeNotificationChannel(context)
+            notificationManager.createNotificationChannel(
+                NotificationChannel(CHANNEL_ID_ALARM, context.getString(R.string.notification_title_task_alarms), NotificationManager.IMPORTANCE_HIGH).apply {
+                    lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+                    enableLights(true)
+                    enableVibration(true)
+                }
+            )
         }
         notificationManager.notify(NotificationHelper().TASK_NOTIFICATION_ID, builder.build())
     }
@@ -61,13 +67,14 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
         val resultIntent = Intent(context, SplashFragment::class.java)
         val resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID_ALARM)
-                .setSmallIcon(R.drawable.ic_menu_camera) // todo: ver um icone para notificação
-                .setCategory(NotificationCompat.CATEGORY_ALARM)
-                .setContentIntent(resultPendingIntent)
-                .setAutoCancel(true)
-                .apply { priority = NotificationCompat.PRIORITY_HIGH }
-                .apply { color = ContextCompat.getColor(context, R.color.colorPrimary) }
+        val builder = NotificationCompat.Builder(context, CHANNEL_ID_ALARM).apply {
+                setSmallIcon(R.drawable.ic_menu_camera)
+                setCategory(NotificationCompat.CATEGORY_ALARM)
+                setContentIntent(resultPendingIntent)
+                setAutoCancel(true)
+                priority = NotificationCompat.PRIORITY_HIGH
+                color = ContextCompat.getColor(context, R.color.colorPrimary)
+        }
 
         initContentTextAndTitle(context, intent, builder)
 
@@ -86,7 +93,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
             if (tasks.size <= 1) {
                 initContentFromIntent(intent, builder)
             } else {
-                setTextAndTitleFromList(context, builder, tasks.size)
+                setTextAndTitleFromList(context, builder, tasks)
             }
 
         } catch (e: Exception) {
@@ -96,19 +103,19 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
     }
 
     private suspend fun initContentFromIntent(intent: Intent, builder: NotificationCompat.Builder) {
-        val taskId = intent.getLongExtra(EXTRA_TASK_ID, -1)
+        val taskId = intent.getIntExtra(EXTRA_TASK_ID, -1)
 
-        val task = getTaskByIdUseCase.invoke(taskId)
+        val task = getTaskByIdUseCase.invoke(taskId.toLong())
         builder.setContentTitle(task.title)
 
-        if (task.description?.isNotEmpty().safe()) {
+        if (task.description.isNotEmpty().safe()) {
             builder.setContentText(task.description)
         }
     }
 
-    private fun setTextAndTitleFromList(context: Context, builder: NotificationCompat.Builder, tasksQuantity: Int) {
-        builder.setContentTitle(tasksQuantity.toString() + " " + context.getString(R.string.notification_title_task_alarms))
-        builder.setContentText(context.getString(R.string.touch_to_check))
+    private fun setTextAndTitleFromList(context: Context, builder: NotificationCompat.Builder, tasks: List<Task>) {
+        builder.setContentTitle("${tasks.size} ${context.getString(R.string.notification_title_task_alarms)}")
+        builder.setContentText("${context.getString(R.string.most_recently_task)} ${tasks.last()?.title}\n${context.getString(R.string.touch_to_check)}")
     }
 
     private suspend fun initVibrate(builder: NotificationCompat.Builder) {
@@ -117,20 +124,5 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
         } else {
             builder.setDefaults(NotificationCompat.DEFAULT_LIGHTS)
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private suspend fun NotificationManager.makeNotificationChannel(context: Context) {
-        createNotificationChannel(
-                NotificationChannel(
-                        CHANNEL_ID_ALARM,
-                        context.getString(R.string.notification_title_task_alarms),
-                        NotificationManager.IMPORTANCE_HIGH
-                ).apply {
-                    lockscreenVisibility = Notification.VISIBILITY_PUBLIC
-                    enableLights(true)
-                    enableVibration(true)
-                }
-        )
     }
 }

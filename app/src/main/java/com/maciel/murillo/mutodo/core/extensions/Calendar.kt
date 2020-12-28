@@ -3,7 +3,10 @@ package com.maciel.murillo.mutodo.core.extensions
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+private const val ONE_HOUR_IN_MILLIS = 3600000L
+private const val HALF_DAY_IN_MILLIS = 43200000L
+private const val ONE_DAY_IN_MILLIS = 86400000L
+private const val TWO_DAYS_IN_MILLIS = 172800000L
 private const val DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
 
 fun String.toDateTimeCalendar(): Calendar {
@@ -50,6 +53,17 @@ fun Calendar.isBeforeYesterday() = before(getInitialCalendarForYesterday())
 fun Calendar.isBeforeNow() = before(Calendar.getInstance())
 
 fun Calendar.isAfterNow() = after(Calendar.getInstance())
+
+fun Calendar.hasLessThenOneHourFromNow() = hasLessThenSometimeFromNow(ONE_HOUR_IN_MILLIS)
+
+fun Calendar.hasLessThenHalfDayFromNow() = hasLessThenSometimeFromNow(HALF_DAY_IN_MILLIS)
+
+fun Calendar.hasLessThenOneDayFromNow() = hasLessThenSometimeFromNow(ONE_DAY_IN_MILLIS)
+
+fun Calendar.hasLessThenSometimeFromNow(timeInMillis: Long): Boolean {
+    val nowInMillis = Calendar.getInstance().timeInMillis
+    return ( this.timeInMillis - nowInMillis ) < timeInMillis
+}
 
 fun getInitialAlarm(): Calendar {
     val currentTime = Calendar.getInstance()

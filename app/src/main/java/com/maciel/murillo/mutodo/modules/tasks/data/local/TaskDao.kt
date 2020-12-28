@@ -7,7 +7,7 @@ import com.maciel.murillo.mutodo.modules.tasks.data.model.TaskData
 interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(task: TaskData)
+    suspend fun insert(task: TaskData): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(tasks: List<TaskData>)
@@ -15,11 +15,8 @@ interface TaskDao {
     @Update
     suspend fun update(task: TaskData)
 
-    @Query("DELETE FROM TaskData WHERE id = :id")
-    suspend fun delete(id: Long)
-
-//    @Delete
-//    suspend fun delete(id: Long)
+    @Delete
+    suspend fun delete(task: TaskData)
 
     @Query("SELECT * FROM TaskData ORDER BY id ASC")
     suspend fun findAll(): List<TaskData>

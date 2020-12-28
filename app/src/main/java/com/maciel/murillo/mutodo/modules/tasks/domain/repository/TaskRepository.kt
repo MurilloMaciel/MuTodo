@@ -5,13 +5,13 @@ import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 
 interface TaskRepository {
 
-    suspend fun insert(task: Task)
+    suspend fun insert(task: Task): Long
 
     suspend fun insertAll(tasks: List<Task>)
 
     suspend fun update(task: Task)
 
-    suspend fun delete(id: Long)
+    suspend fun delete(task: Task)
 
     suspend fun findAll(): List<Task>
 

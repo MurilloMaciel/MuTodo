@@ -13,6 +13,7 @@ val taskDomainModule = module {
     factory { InsertTaskListUseCase(get(), get()) }
     factory { UpdateTaskUseCase(get(), get(), get()) }
     factory { CancelAlarmScheduleUseCase(get()) }
+    factory { UpdateAlarmScheduleUseCase(get()) }
     factory { GetNextAlarmUseCase() }
     factory { ScheduleAlarmUpdateUseCase(get()) }
     factory { ScheduleAlarmUseCase(get()) }

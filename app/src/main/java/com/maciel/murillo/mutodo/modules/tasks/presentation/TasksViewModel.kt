@@ -60,7 +60,6 @@ class TasksViewModel(
     }
 
     fun onClickAddTask() {
-        "to na nav".log()
         _addOrUpdateTask.postValue(Event(-1L))
     }
 

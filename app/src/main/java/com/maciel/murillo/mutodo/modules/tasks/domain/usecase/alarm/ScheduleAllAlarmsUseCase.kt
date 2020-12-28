@@ -21,7 +21,7 @@ class ScheduleAllAlarmsUseCase(private val getAllTasksUseCase: GetAllTasksUseCas
                 }
 
                 if (alarm.dateTime.isAfterNow()) {
-                    scheduleAlarmUseCase.invoke(alarm, task.id.safe())
+                    scheduleAlarmUseCase.invoke(task)
                 }
             }
         }
