@@ -11,6 +11,7 @@ import com.maciel.murillo.mutodo.core.extensions.toDateTimeCalendar
 import com.maciel.murillo.mutodo.core.platform.receivers.AlarmReceiver
 import com.maciel.murillo.mutodo.core.platform.receivers.ScheduleAlarmsReceiver
 import com.maciel.murillo.mutodo.modules.tasks.data.model.TaskData
+import com.maciel.murillo.mutodo.modules.tasks.domain.model.RepeatType
 import java.util.*
 
 class AlarmManager(private val context: Context) {
@@ -25,12 +26,16 @@ class AlarmManager(private val context: Context) {
 
         val triggerAtMillis = task.alarm?.nextAlarmDate?.toDateTimeCalendar()?.timeInMillis.safe()
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            manager?.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pending)
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            manager?.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pending)
+        if (task.alarm?.repeatType != RepeatType.NOT_REPEAT.ordinal) {
+            manager?.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, AlarmManager.INTERVAL_DAY, pending)
         } else {
-            manager?.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAtMillis, null), pending)
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                manager?.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pending)
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                manager?.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pending)
+            } else {
+                manager?.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAtMillis, null), pending)
+            }
         }
     }
 

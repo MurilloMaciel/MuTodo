@@ -16,7 +16,6 @@ val taskDomainModule = module {
     factory { UpdateAlarmScheduleUseCase(get()) }
     factory { CountByCategoryUseCase(get()) }
     factory { GetNextAlarmUseCase() }
-    factory { ScheduleAlarmUpdateUseCase(get()) }
     factory { ScheduleAlarmUseCase(get()) }
-    factory { ScheduleAllAlarmsUseCase(get(), get(), get()) }
+    factory { ScheduleAllAlarmsUseCase(get(), get()) }
 }

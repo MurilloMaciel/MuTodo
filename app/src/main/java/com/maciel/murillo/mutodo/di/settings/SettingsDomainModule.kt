@@ -8,5 +8,4 @@ val settingsDomainModule = module {
     factory { GetAlarmVibrateUseCase(get()) }
     factory { GetUserNameUseCase(get()) }
     factory { SetAlarmVibrateUseCase(get()) }
-    factory { SetInitialSettingsUseCase(get(), get()) }
 }

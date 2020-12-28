@@ -2,7 +2,15 @@ package com.maciel.murillo.mutodo.modules.tasks.domain.model
 
 enum class RepeatType {
 
-    NOT_REPEAT, DAY, WEEK, MONTH, YEAR, SECOND, MINUTE, HOUR, CUSTOM;
+    NOT_REPEAT,
+    DAY,
+    WEEK,
+    MONTH,
+    YEAR,
+    SECOND,
+    MINUTE,
+    HOUR,
+    CUSTOM;
 
     companion object {
         fun isAlarmRepeating(alarm: Alarm): Boolean {
