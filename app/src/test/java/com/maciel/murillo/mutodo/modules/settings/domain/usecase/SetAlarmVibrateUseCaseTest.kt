@@ -20,7 +20,7 @@ class SetAlarmVibrateUseCaseTest {
     }
 
     @Test
-    fun `should get alarm vibrate from repository`() = runBlocking {
+    fun `should set alarm vibrate from repository`() = runBlocking {
         setAlarmVibrateUseCase.invoke(true)
 
         coVerify { repository.setAlarmVibrate(true) }

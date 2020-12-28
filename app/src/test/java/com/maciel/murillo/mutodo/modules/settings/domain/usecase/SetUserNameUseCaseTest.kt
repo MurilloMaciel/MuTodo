@@ -1,6 +1,5 @@
 package com.maciel.murillo.mutodo.modules.settings.domain.usecase
 
-import android.net.Uri
 import com.maciel.murillo.mutodo.modules.settings.domain.repository.SettingsRepository
 import io.mockk.coVerify
 import io.mockk.confirmVerified
@@ -9,23 +8,24 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class SetAlarmSoundUseCaseTest {
+class SetUserNameUseCaseTest {
 
     private val repository: SettingsRepository = mockk(relaxed = true)
 
-    private lateinit var setAlarmSoundUseCase: SetAlarmSoundUseCase
+    private lateinit var setUserNameUseCase: SetUserNameUseCase
 
     @Before
     fun setUp() {
-        setAlarmSoundUseCase = SetAlarmSoundUseCase(repository)
+        setUserNameUseCase = SetUserNameUseCase(repository)
     }
 
     @Test
-    fun `should set alarm sound from repository`() = runBlocking {
-        val uriMock = mockk<Uri>()
-        setAlarmSoundUseCase.invoke(uriMock)
+    fun `should set user name from repository`() = runBlocking {
+        val userName = "userName"
 
-        coVerify { repository.setAlarmSound(uriMock) }
+        setUserNameUseCase.invoke(userName)
+
+        coVerify { repository.setUserName(userName) }
         confirmVerified(repository)
     }
 }

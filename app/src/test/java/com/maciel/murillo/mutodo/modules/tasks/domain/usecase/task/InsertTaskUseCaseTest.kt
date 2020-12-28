@@ -1,5 +1,6 @@
 package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task
 
+import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.RepeatType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
@@ -29,48 +30,53 @@ class InsertTaskUseCaseTest {
     fun `should insert task from repository`() = runBlocking {
         val id = 10L
         val task = Task(
-                id = id,
-                title = "title",
-                description = "description",
-                alarm = null,
-                insertingDate = "date",
-                enabled = false,
+            id = -1,
+            title = "title",
+            description = "description",
+            alarm = null,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
-        coEvery { repository.insert(task) } returns Unit
+        coEvery { repository.insert(task) } returns id
 
         val result = insertTaskUseCase.invoke(task)
 
         coVerify { repository.insert(task) }
         confirmVerified(repository)
-        assertEquals(result, Unit)
+        assertEquals(task.id, id)
     }
 
     @Test
     fun `should schedule alarm if alarm exists`() = runBlocking {
         val alarm = Alarm(Calendar.getInstance(), RepeatType.NOT_REPEAT, "customDays")
+        val id = 10L
         val task = Task(
-                id = 10L,
-                title = "title",
-                description = "description",
-                alarm = alarm,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = alarm,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
 
         insertTaskUseCase.invoke(task)
 
-        coVerify { scheduleAlarmUseCase.invoke(alarm, task.id) }
+        coVerify { scheduleAlarmUseCase.invoke(task) }
     }
 
     @Test
     fun `should not schedule alarm if alarm doesnt exists`() = runBlocking {
+        val id = 10L
         val task = Task(
-                id = 10L,
-                title = "title",
-                description = "description",
-                alarm = null,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = null,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
 
         insertTaskUseCase.invoke(task)

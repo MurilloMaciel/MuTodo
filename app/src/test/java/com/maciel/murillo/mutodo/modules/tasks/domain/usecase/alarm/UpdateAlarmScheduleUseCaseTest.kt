@@ -14,19 +14,19 @@ import org.junit.Before
 import org.junit.Test
 import java.util.*
 
-class CancelAlarmScheduleUseCaseTest {
+class UpdateAlarmScheduleUseCaseTest {
 
     private val repository: AlarmRepository = mockk(relaxed = true)
 
-    private lateinit var cancelAlarmScheduleUseCase: CancelAlarmScheduleUseCase
+    private lateinit var updateAlarmScheduleUseCase: UpdateAlarmScheduleUseCase
 
     @Before
     fun setUp() {
-        cancelAlarmScheduleUseCase = CancelAlarmScheduleUseCase(repository)
+        updateAlarmScheduleUseCase = UpdateAlarmScheduleUseCase(repository)
     }
 
     @Test
-    fun `should cancel alarm from repository`() = runBlocking {
+    fun `should update alarm from repository`() = runBlocking {
         val alarm = Alarm(Calendar.getInstance(), RepeatType.NOT_REPEAT, "customDays")
         val id = 10L
         val task = Task(
@@ -38,11 +38,11 @@ class CancelAlarmScheduleUseCaseTest {
             insertingDate = "date",
             enabled = false,
         )
-        coEvery { repository.cancelAlarm(task) } returns Unit
+        coEvery { repository.updateAlarmSchedule(task) } returns Unit
 
-        val result = cancelAlarmScheduleUseCase.invoke(task)
+        val result = updateAlarmScheduleUseCase.invoke(task)
 
-        coVerify { repository.cancelAlarm(task) }
+        coVerify { repository.updateAlarmSchedule(task) }
         confirmVerified(repository)
         kotlin.test.assertEquals(result, Unit)
     }

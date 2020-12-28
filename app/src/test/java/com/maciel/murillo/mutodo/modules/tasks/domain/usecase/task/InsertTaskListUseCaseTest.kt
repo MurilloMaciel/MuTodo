@@ -1,5 +1,6 @@
 package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task
 
+import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.RepeatType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
@@ -40,30 +41,34 @@ class InsertTaskListUseCaseTest {
     @Test
     fun `should schedule alarms if exists`() = runBlocking {
         val alarm = Alarm(Calendar.getInstance(), RepeatType.NOT_REPEAT, "customDays")
+        val id = 10L
         val task = Task(
-                id = 10L,
-                title = "title",
-                description = "description",
-                alarm = alarm,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = alarm,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
         val tasks = listOf<Task>(task)
 
         insertTaskListUseCase.invoke(tasks)
 
-        coVerify { scheduleAlarmUseCase.invoke(alarm, task.id) }
+        coVerify { scheduleAlarmUseCase.invoke(task) }
     }
 
     @Test
     fun `should not schedule any alarm if none exists`() = runBlocking {
+        val id = 10L
         val task = Task(
-                id = 10L,
-                title = "title",
-                description = "description",
-                alarm = null,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = null,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
         val tasks = listOf<Task>(task)
 

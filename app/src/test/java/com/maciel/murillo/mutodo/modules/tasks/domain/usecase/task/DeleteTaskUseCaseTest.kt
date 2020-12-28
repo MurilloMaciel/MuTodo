@@ -1,5 +1,6 @@
 package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task
 
+import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.RepeatType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
@@ -29,18 +30,19 @@ class DeleteTaskUseCaseTest {
     fun `should delete task from repository`() = runBlocking {
         val id = 10L
         val task = Task(
-                id = id,
-                title = "title",
-                description = "description",
-                alarm = null,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = null,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
-        coEvery { repository.delete(id) } returns Unit
+        coEvery { repository.delete(task) } returns Unit
 
         val result = deleteTaskUseCase.invoke(task)
 
-        coVerify { repository.delete(id) }
+        coVerify { repository.delete(task) }
         confirmVerified(repository)
         assertEquals(result, Unit)
     }
@@ -48,29 +50,33 @@ class DeleteTaskUseCaseTest {
     @Test
     fun `should cancel alarm schedule if alarm exists`() = runBlocking {
         val alarm = Alarm(Calendar.getInstance(), RepeatType.NOT_REPEAT, "customDays")
+        val id = 10L
         val task = Task(
-                id = 10L,
-                title = "title",
-                description = "description",
-                alarm = alarm,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = alarm,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
 
         deleteTaskUseCase.invoke(task)
 
-        coVerify { cancelAlarmScheduleUseCase.invoke(task.id) }
+        coVerify { cancelAlarmScheduleUseCase.invoke(task) }
     }
 
     @Test
     fun `should not cancel alarm schedule if alarm doesnt exists`() = runBlocking {
+        val id = 10L
         val task = Task(
-                id = 10L,
-                title = "title",
-                description = "description",
-                alarm = null,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = null,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
 
         deleteTaskUseCase.invoke(task)

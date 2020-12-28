@@ -1,5 +1,8 @@
 package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task
 
+import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
+import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
+import com.maciel.murillo.mutodo.modules.tasks.domain.model.RepeatType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
 import com.maciel.murillo.mutodo.modules.tasks.domain.repository.TaskRepository
 import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task.GetTaskByIdUseCase
@@ -10,6 +13,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
 
 class GetTaskByIdUseCaseTest {
@@ -27,12 +31,13 @@ class GetTaskByIdUseCaseTest {
     fun `should get task from repository`() = runBlocking {
         val id = 10L
         val task = Task(
-                id = id,
-                title = "title",
-                description = "description",
-                alarm = null,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = null,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
         coEvery { repository.findById(id) } returns task
 

@@ -1,5 +1,6 @@
 package com.maciel.murillo.mutodo.modules.tasks.domain.usecase.alarm
 
+import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.RepeatType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
@@ -25,22 +26,23 @@ class ScheduleAlarmUseCaseTest {
     }
 
     @Test
-    fun `should get task from repository`() = runBlocking {
+    fun `should schedule alarm from repository`() = runBlocking {
         val alarm = Alarm(Calendar.getInstance(), RepeatType.NOT_REPEAT, "customDays")
         val id = 10L
         val task = Task(
-                id = id,
-                title = "title",
-                description = "description",
-                alarm = alarm,
-                insertingDate = "date",
-                enabled = false,
+            id = id,
+            title = "title",
+            description = "description",
+            alarm = alarm,
+            categoryType = CategoryType.ALL,
+            insertingDate = "date",
+            enabled = false,
         )
-        coEvery { repository.scheduleAlarm(alarm, id) } returns Unit
+        coEvery { repository.scheduleAlarm(task) } returns Unit
 
-        val result = scheduleAlarmUseCase.invoke(alarm, id)
+        val result = scheduleAlarmUseCase.invoke(task)
 
-        coVerify { repository.scheduleAlarm(alarm, id) }
+        coVerify { repository.scheduleAlarm(task) }
         confirmVerified(repository)
         kotlin.test.assertEquals(result, Unit)
     }
