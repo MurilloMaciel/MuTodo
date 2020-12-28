@@ -14,7 +14,6 @@ import com.maciel.murillo.mutodo.R
 import com.maciel.murillo.mutodo.core.extensions.isBeforeNow
 import com.maciel.murillo.mutodo.core.extensions.safe
 import com.maciel.murillo.mutodo.core.helper.NotificationHelper
-import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetAlarmSoundUseCase
 import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetAlarmVibrateUseCase
 import com.maciel.murillo.mutodo.modules.splash.presentation.SplashFragment
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
@@ -35,7 +34,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
     private val getTaskByIdUseCase: GetTaskByIdUseCase by inject()
     private val getAllTasksUseCase: GetAllTasksUseCase by inject()
-    private val getAlarmSoundUseCase: GetAlarmSoundUseCase by inject()
+//    private val getAlarmSoundUseCase: GetAlarmSoundUseCase by inject()
     private val getAlarmVibrateUseCase: GetAlarmVibrateUseCase by inject()
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -80,7 +79,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             initVibrate(builder)
-            getAlarmSoundUseCase.invoke()?.run { builder.setSound(this) }
+//            getAlarmSoundUseCase.invoke()?.run { builder.setSound(this) }
         }
 
         return builder

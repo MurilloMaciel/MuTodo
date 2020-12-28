@@ -1,12 +1,10 @@
 package com.maciel.murillo.mutodo.modules.settings.domain.repository
 
-import android.net.Uri
-
 interface SettingsRepository {
 
-    suspend fun getAlarmSound(): Uri?
+    suspend fun getUserName(): String?
 
-    suspend fun setAlarmSound(toneUri: Uri)
+    suspend fun setUserName(userName: String)
 
     suspend fun getAlarmVibrate(): Boolean
 

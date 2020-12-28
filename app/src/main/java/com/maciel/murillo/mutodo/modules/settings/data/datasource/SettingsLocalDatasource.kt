@@ -1,12 +1,10 @@
 package com.maciel.murillo.mutodo.modules.settings.data.datasource
 
-import android.net.Uri
-
 interface SettingsLocalDatasource {
 
-    fun getAlarmSound(): Uri?
+    fun getUserName(): String?
 
-    fun setAlarmSound(alarmTone: Uri)
+    fun setUserName(userName: String)
 
     fun getAlarmVibrate(): Boolean
 

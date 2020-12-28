@@ -37,7 +37,7 @@ class CategoriesFragment : BaseBindingFragment<FragmentCategoriesBinding>() {
     override fun onResume() {
         super.onResume()
 
-        categoriesViewModel.getAllTasksCount()
+        categoriesViewModel.onInitializeScreen()
     }
 
     override fun setUpView(view: View, savedInstanceState: Bundle?) {
@@ -61,11 +61,25 @@ class CategoriesFragment : BaseBindingFragment<FragmentCategoriesBinding>() {
         setGymTaskCountObserver()
         setGeneralTaskCountObserver()
         setFunTaskCountObserver()
+        setUpdateUserNameObserver()
+        setGoToAboutObserver()
+    }
+
+    private fun setUpdateUserNameObserver() {
+        categoriesViewModel.userName.observe(viewLifecycleOwner, { userName ->
+            setUserNameText(userName)
+        })
+    }
+
+    private fun setGoToAboutObserver() {
+        categoriesViewModel.goToAbout.observe(viewLifecycleOwner, EventObserver {
+            navController.navigate(CategoriesFragmentDirections.goToAboutFrag())
+        })
     }
 
     private fun setGoToSettingsObserver() {
         categoriesViewModel.goToSettings.observe(viewLifecycleOwner, EventObserver {
-            // TODO: 28/12/2020 go to settings
+            navController.navigate(CategoriesFragmentDirections.goToSettingsFrag())
         })
     }
 
@@ -124,13 +138,13 @@ class CategoriesFragment : BaseBindingFragment<FragmentCategoriesBinding>() {
 
     private fun setUserNameText(userName: String? = null) {
         val userNameGreetings = getString(R.string.welcome).replace("{name}", userName ?: getString(R.string.user))
-        categoriesViewModel.replaceUserNameGreetings(userNameGreetings)
+        categoriesViewModel.onUpdateUserName(userNameGreetings)
     }
 
     private fun setAllTasksText(allTasks: Int? = null) {
         val allTasksText = allTasks?.run {
             getString(R.string.all_tasks).replace("{count}", "$allTasks")
         } ?: getString(R.string.no_task_remaining)
-        categoriesViewModel.replaceAllTasksText(allTasksText)
+        categoriesViewModel.onUpdateAllTasksText(allTasksText)
     }
 }

@@ -10,17 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.maciel.murillo.mutodo.R
 
+private const val splashDelay = 2000L
+
 class SplashFragment : Fragment() {
 
-    val startAppHandler = Handler(Looper.getMainLooper())
+    private val startAppHandler = Handler(Looper.getMainLooper())
 
-    val startAppRunnable = Runnable {
+    private val startAppRunnable = Runnable {
         navController.navigate(SplashFragmentDirections.goToCategoriesFrag())
     }
 
     private val navController by lazy { findNavController() }
-
-    val splashDelay = 2000L
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_splash, container, false)

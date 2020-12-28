@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 val categoriesPresentationModule = module {
 
-    viewModel { CategoriesViewModel(get()) }
+    viewModel { CategoriesViewModel(get(), get()) }
 }

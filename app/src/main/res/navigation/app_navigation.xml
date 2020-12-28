@@ -37,6 +37,13 @@
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit"
             app:popUpTo="@id/frag_categories" />
+
+        <action
+            android:id="@+id/goToAboutFrag"
+            app:destination="@id/frag_about"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/frag_categories" />
     </fragment>
 
     <fragment
@@ -77,5 +84,10 @@
         android:id="@+id/frag_settings"
         android:name="com.maciel.murillo.mutodo.modules.settings.presentation.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/frag_about"
+        android:name="com.maciel.murillo.mutodo.modules.about.presentation.AboutFragment"
+        tools:layout="@layout/fragment_about" />
 
 </navigation>

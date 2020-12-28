@@ -8,14 +8,14 @@
     <string name="pattern_month_day_short">dd \'de\' MMM</string>
     <string name="pattern_month_day_long">dd \'de\' MMMM</string>
 
-<!--    notification-->
+    <!--    notification-->
     <string name="tasks_to_do">MuTodo</string>
     <string name="most_recently_task">Tarefa mais recente:</string>
     <string name="touch_to_check">Toque para visualizar</string>
     <string name="notification_title_task_alarms">Tarefas</string>
     <string name="new_task">Nova Tarefa</string>
 
-<!--    categories-->
+    <!--    categories-->
     <string name="welcome">Olá {name}</string>
     <string name="user">usuário</string>
     <string name="all_tasks">{count} itens cadastrados</string>
@@ -31,12 +31,12 @@
     <string name="gym_category_title">Exercícios</string>
     <string name="go_to_all_tasks">Ver tudo</string>
 
-<!--    task-->
+    <!--    task-->
     <string name="add_tasks">Adicionar tarefas</string>
     <string name="tasks_title">Tarefas</string>
     <string name="no_alarm_scheduled">Nenhum alarme agendado</string>
 
-<!--    add task-->
+    <!--    add task-->
     <string name="add_task">Adicionar tarefa</string>
     <string name="add_task_title_hint">Título</string>
     <string name="add_task_description_hint">Descrição</string>
@@ -47,7 +47,16 @@
     <string name="alarm_repeat_initial_text">Sem repetição</string>
     <string name="alarm_repeat_all_days">Repetir todos os dias</string>
 
-<!--    settings-->
-    <!--    <string name=""></string>-->
+    <!--    settings-->
+    <string name="settings">Configurações</string>
+    <string name="user_name">Nome de usuário</string>
+    <string name="enable_vibration">Habilitar vibração</string>
+
+    <!--    about-->
+    <string name="about">Sobre</string>
+    <string name="about_description">O MuTudo é um aplicativo de gerenciamento de tarefas que vai te ajudar a se programar, nem que a vaca tussa.</string>
+    <string name="version">Versão</string>
+    <string name="developed_by">Desenvolvedor</string>
+    <string name="developer">Murillo M. Maciel</string>
 
 </resources>

@@ -7,14 +7,19 @@ import androidx.lifecycle.viewModelScope
 import com.maciel.murillo.mutodo.core.extensions.safe
 import com.maciel.murillo.mutodo.core.helper.Event
 import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
+import com.maciel.murillo.mutodo.modules.settings.domain.usecase.GetUserNameUseCase
 import com.maciel.murillo.mutodo.modules.tasks.domain.usecase.task.CountByCategoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class CategoriesViewModel(
-    private val countByCategoryUseCase: CountByCategoryUseCase
+    private val countByCategoryUseCase: CountByCategoryUseCase,
+    private val getUserNameUseCase: GetUserNameUseCase
 ) : ViewModel() {
+
+    private val _userName = MutableLiveData<String>().apply { value = "" }
+    val userName: LiveData<String> = _userName
 
     private val _allTasksCount = MutableLiveData<Int>().apply { value = 0 }
     val allTasks: LiveData<Int> = _allTasksCount
@@ -49,7 +54,10 @@ class CategoriesViewModel(
     private val _goToSettings = MutableLiveData<Event<Unit>>()
     val goToSettings: LiveData<Event<Unit>> = _goToSettings
 
-    fun getAllTasksCount() {
+    private val _goToAbout = MutableLiveData<Event<Unit>>()
+    val goToAbout: LiveData<Event<Unit>> = _goToAbout
+
+    private fun getAllTasksCount() {
         viewModelScope.launch(Dispatchers.IO) {
             val workCount = countByCategoryUseCase.invoke(CategoryType.WORK)
             _workTaskCount.postValue(workCount)
@@ -67,6 +75,17 @@ class CategoriesViewModel(
         }
     }
 
+    private fun getUserName() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _userName.postValue(getUserNameUseCase.invoke())
+        }
+    }
+
+    fun onInitializeScreen() {
+        getUserName()
+        getAllTasksCount()
+    }
+
     fun onClickGoToAllCategories() {
         _goToAllCategories.postValue(Event(Unit))
     }
@@ -75,11 +94,15 @@ class CategoriesViewModel(
         _goToSettings.postValue(Event(Unit))
     }
 
-    fun replaceUserNameGreetings(greetings: String) {
+    fun onClickGoToAbout() {
+        _goToAbout.postValue(Event(Unit))
+    }
+
+    fun onUpdateUserName(greetings: String) {
         _userNameGreetings.postValue(greetings)
     }
 
-    fun replaceAllTasksText(allTasksText: String) {
+    fun onUpdateAllTasksText(allTasksText: String) {
         _allTasksText.postValue(allTasksText)
     }
 }

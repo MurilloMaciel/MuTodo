@@ -31,6 +31,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_add_task" />
 
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_cow_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_add_task"
+            app:layout_constraintStart_toEndOf="@+id/iv_back"
+            app:layout_constraintTop_toTopOf="@+id/tv_add_task" />
+
         <TextView
             android:id="@+id/tv_add_task"
             android:layout_width="wrap_content"
@@ -101,16 +111,16 @@
             android:layout_marginHorizontal="36dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/bg_enable_alarm"
-            android:textColor="@color/gray_dark_1"
             android:button="@null"
             android:checked="@={vm.alarmEnabled}"
             android:gravity="center"
             android:minHeight="55dp"
             android:text="@{vm.alarmEnabled ? @string/add_alarm_checked : @string/add_alarm_unchecked}"
+            android:textColor="@color/gray_dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/til_task_description"
-            tools:text="@string/add_alarm_checked"/>
+            tools:text="@string/add_alarm_checked" />
 
         <View
             android:id="@+id/v_alarm_enable_divider"
@@ -169,12 +179,12 @@
                 android:layout_marginTop="8dp"
                 android:checked="@={vm.alarmRepeatAlwaysEnabled}"
                 android:fontFamily="@font/roboto"
+                android:text="@string/alarm_repeat_all_days"
                 android:textColor="@color/gray_dark_1"
                 android:textSize="16sp"
-                android:text="@string/alarm_repeat_all_days"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_alarm_hour"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_alarm_hour" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

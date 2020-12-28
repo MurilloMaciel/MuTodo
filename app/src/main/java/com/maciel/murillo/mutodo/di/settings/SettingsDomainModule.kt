@@ -4,9 +4,9 @@ import com.maciel.murillo.mutodo.modules.settings.domain.usecase.*
 import org.koin.dsl.module
 
 val settingsDomainModule = module {
-    factory { GetAlarmSoundUseCase(get()) }
+    factory { SetUserNameUseCase(get()) }
     factory { GetAlarmVibrateUseCase(get()) }
-    factory { SetAlarmSoundUseCase(get()) }
+    factory { GetUserNameUseCase(get()) }
     factory { SetAlarmVibrateUseCase(get()) }
     factory { SetInitialSettingsUseCase(get(), get()) }
 }

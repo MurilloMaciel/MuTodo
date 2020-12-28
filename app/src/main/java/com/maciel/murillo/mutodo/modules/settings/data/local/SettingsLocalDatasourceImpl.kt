@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.media.RingtoneManager
 import android.net.Uri
+import com.maciel.murillo.mutodo.core.extensions.safe
 import com.maciel.murillo.mutodo.modules.settings.data.datasource.SettingsLocalDatasource
 
 class SettingsLocalDatasourceImpl(context: Context) : SettingsLocalDatasource {
@@ -13,15 +14,15 @@ class SettingsLocalDatasourceImpl(context: Context) : SettingsLocalDatasource {
         const val FIRST_TIME_LAUNCHING_APP = "FIRST_TIME_LAUNCHING_APP"
         const val CURRENT_SOUND = "CURRENT_SOUND"
         const val ALLOW_VIBRATION = "ALLOW_VIBRATION"
+        const val USER_NAME = "USER_NAME"
     }
 
-    override fun getAlarmSound(): Uri? {
-        val currentSound = preferences.getString(CURRENT_SOUND, null)
-        return currentSound?.run { Uri.parse(currentSound) }
+    override fun getUserName(): String? {
+        return preferences.getString(USER_NAME, "")
     }
 
-    override fun setAlarmSound(alarmTone: Uri) {
-        getEditor().putString(CURRENT_SOUND, alarmTone.toString()).commit()
+    override fun setUserName(userName: String) {
+        getEditor().putString(USER_NAME, userName).commit()
     }
 
     override fun getAlarmVibrate(): Boolean {
@@ -42,7 +43,7 @@ class SettingsLocalDatasourceImpl(context: Context) : SettingsLocalDatasource {
 
     override fun setDefaultAlarmTone() {
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        setAlarmSound(uri)
+        getEditor().putString(CURRENT_SOUND, uri.toString()).commit()
     }
 
     private val preferences: SharedPreferences by lazy {
