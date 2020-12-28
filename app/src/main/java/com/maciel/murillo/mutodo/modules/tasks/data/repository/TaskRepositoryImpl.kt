@@ -1,5 +1,6 @@
 package com.maciel.murillo.mutodo.modules.tasks.data.repository
 
+import com.maciel.murillo.mutodo.modules.categories.data.model.mapToCategoryTypeData
 import com.maciel.murillo.mutodo.modules.categories.data.model.toEnumString
 import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
 import com.maciel.murillo.mutodo.modules.tasks.data.datasource.TaskLocalDatasource
@@ -23,4 +24,6 @@ class TaskRepositoryImpl(private val localDatasource: TaskLocalDatasource) : Tas
     override suspend fun findAllByCategory(categoryType: CategoryType): List<Task> = localDatasource.findAllByCategory(categoryType.toEnumString()).map { taskData -> taskData.mapToTask() }
 
     override suspend fun findById(id: Long): Task = localDatasource.findById(id).mapToTask()
+
+    override suspend fun countByCategory(categoryType: CategoryType): Int = localDatasource.countByCategory(categoryType.toEnumString())
 }

@@ -43,13 +43,13 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_tasks_remaining"
+        app:layout_constraintBottom_toTopOf="@+id/tv_tasks_count"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Title" />
 
     <TextView
-        android:id="@+id/tv_tasks_remaining"
+        android:id="@+id/tv_tasks_count"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

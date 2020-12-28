@@ -24,4 +24,6 @@ class TaskLocalDatasourceImpl(private val context: Context) : TaskLocalDatasourc
     override suspend fun findAllByCategory(categoryType: String): List<TaskData> = AppDatabase.getInstance(context).taskDao().findAllByCategory(categoryType)
 
     override suspend fun findById(id: Long): TaskData = AppDatabase.getInstance(context).taskDao().findById(id)
+
+    override suspend fun countByCategory(categoryType: String): Int = AppDatabase.getInstance(context).taskDao().countByCategory(categoryType)
 }

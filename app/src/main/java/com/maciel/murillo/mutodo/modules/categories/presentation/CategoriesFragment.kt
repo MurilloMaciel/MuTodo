@@ -9,6 +9,9 @@ import com.maciel.murillo.mutodo.modules.categories.presentation.model.CategoryP
 import kotlinx.android.synthetic.main.fragment_categories.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.navigation.fragment.findNavController
+import com.maciel.murillo.mutodo.core.helper.EventObserver
+import com.maciel.murillo.mutodo.modules.categories.presentation.model.CategoriesPresentation
+import com.maciel.murillo.mutodo.modules.categories.presentation.model.CategoryTypePresentation
 
 class CategoriesFragment : BaseBindingFragment<FragmentCategoriesBinding>() {
 
@@ -26,27 +29,108 @@ class CategoriesFragment : BaseBindingFragment<FragmentCategoriesBinding>() {
         categories = categories,
         callback = object : CategoryListener {
             override fun onClickCategory(position: Int) {
-                navController.navigate(CategoriesFragmentDirections.goToTasksFrag(categories[position].categoryPresentation.type))
+                navController.navigate(CategoriesFragmentDirections.goToTasksFrag(categories[position].category.type))
             }
         }
     )
 
+    override fun onResume() {
+        super.onResume()
+
+        categoriesViewModel.getAllTasksCount()
+    }
+
     override fun setUpView(view: View, savedInstanceState: Bundle?) {
         super.setUpView(view, savedInstanceState)
 
-        setUpCategoriesRecyclerView()
+        rv_categories.adapter = categoriesAdapter
 
-        tv_hello.text = getString(R.string.welcome).replace("{name}", "name")
-        tv_all_tasks_remaining.text = getString(R.string.all_tasks_remaining).replace("{count}", categoriesViewModel.allTasksRemaining.value.toString())
+        setUserNameText()
+        setAllTasksText()
     }
 
     override fun setUpObservers() {
         super.setUpObservers()
 
+        setGoToSettingsObserver()
+        setGoToAllTasksObserver()
+        setAllTasksCountObserver()
+        setWorkTaskCountObserver()
+        setStudiesTaskCountObserver()
+        setPersonalTaskCountObserver()
+        setGymTaskCountObserver()
+        setGeneralTaskCountObserver()
+        setFunTaskCountObserver()
     }
 
+    private fun setGoToSettingsObserver() {
+        categoriesViewModel.goToSettings.observe(viewLifecycleOwner, EventObserver {
+            // TODO: 28/12/2020 go to settings
+        })
+    }
 
-    private fun setUpCategoriesRecyclerView() = with(rv_categories) {
-        adapter = categoriesAdapter
+    private fun setGoToAllTasksObserver() {
+        categoriesViewModel.goToAllCategories.observe(viewLifecycleOwner, EventObserver {
+            navController.navigate(CategoriesFragmentDirections.goToTasksFrag(CategoryTypePresentation.ALL))
+        })
+    }
+
+    private fun setAllTasksCountObserver() {
+        categoriesViewModel.allTasks.observe(viewLifecycleOwner, { count ->
+            setAllTasksText(count)
+        })
+    }
+
+    private fun setWorkTaskCountObserver() {
+        categoriesViewModel.workTaskCount.observe(viewLifecycleOwner, { count ->
+            updateCategoryCount(CategoriesPresentation.WORK, count)
+        })
+    }
+
+    private fun setStudiesTaskCountObserver() {
+        categoriesViewModel.studiesTaskCount.observe(viewLifecycleOwner, { count ->
+            updateCategoryCount(CategoriesPresentation.STUDIES, count)
+        })
+    }
+
+    private fun setPersonalTaskCountObserver() {
+        categoriesViewModel.personalTaskCount.observe(viewLifecycleOwner, { count ->
+            updateCategoryCount(CategoriesPresentation.PERSONAL, count)
+        })
+    }
+
+    private fun setGymTaskCountObserver() {
+        categoriesViewModel.gymTaskCount.observe(viewLifecycleOwner, { count ->
+            updateCategoryCount(CategoriesPresentation.GYM, count)
+        })
+    }
+
+    private fun setGeneralTaskCountObserver() {
+        categoriesViewModel.generalTaskCount.observe(viewLifecycleOwner, { count ->
+            updateCategoryCount(CategoriesPresentation.GENERAL, count)
+        })
+    }
+
+    private fun setFunTaskCountObserver() {
+        categoriesViewModel.funTaskCount.observe(viewLifecycleOwner, { count ->
+            updateCategoryCount(CategoriesPresentation.FUN, count)
+        })
+    }
+
+    private fun updateCategoryCount(categoryToFind: CategoriesPresentation, taskCount: Int) {
+        categories.find { category -> category.category == categoryToFind }?.count = taskCount
+        categoriesAdapter.notifyDataSetChanged()
+    }
+
+    private fun setUserNameText(userName: String? = null) {
+        val userNameGreetings = getString(R.string.welcome).replace("{name}", userName ?: getString(R.string.user))
+        categoriesViewModel.replaceUserNameGreetings(userNameGreetings)
+    }
+
+    private fun setAllTasksText(allTasks: Int? = null) {
+        val allTasksText = allTasks?.run {
+            getString(R.string.all_tasks).replace("{count}", "$allTasks")
+        } ?: getString(R.string.no_task_remaining)
+        categoriesViewModel.replaceAllTasksText(allTasksText)
     }
 }

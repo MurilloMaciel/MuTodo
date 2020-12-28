@@ -31,6 +31,17 @@ class TasksViewModel(
     private val _addOrUpdateTask = MutableLiveData<Event<Long>>()
     val addOrUpdateTask: LiveData<Event<Long>> = _addOrUpdateTask
 
+    private val _showNoTasksInfo = MutableLiveData<Boolean>()
+    val showNoTasksInfo: LiveData<Boolean> = _showNoTasksInfo
+
+    private val _canAddTask = MutableLiveData<Boolean>()
+    val canAddTask: LiveData<Boolean> = _canAddTask
+
+    private fun updateTasks() {
+        _updateTasks.postValue(Event(Unit))
+        _showNoTasksInfo.postValue(tasks.isEmpty())
+    }
+
     private fun getTasks() {
         viewModelScope.launch {
             tasks = if (categoryType == CategoryType.ALL) {
@@ -38,12 +49,17 @@ class TasksViewModel(
             } else {
                 ArrayList(getAllTasksByCategoryUseCase.invoke(categoryType))
             }
-            _updateTasks.postValue(Event(Unit))
+            updateTasks()
         }
+    }
+
+    private fun checkIfCanAddTask() {
+        _canAddTask.postValue(categoryType != CategoryType.ALL)
     }
 
     fun onInitializeScreen(categoryType: CategoryType) {
         this.categoryType = categoryType
+        checkIfCanAddTask()
         getTasks()
     }
 
@@ -51,7 +67,7 @@ class TasksViewModel(
         viewModelScope.launch {
             deleteTaskUseCase.invoke(tasks[position])
             tasks.removeAt(position)
-            _updateTasks.postValue(Event(Unit))
+            updateTasks()
         }
     }
 

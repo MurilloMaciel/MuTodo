@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.maciel.murillo.mutodo.modules.tasks.presentation.TasksViewModel" />
@@ -76,6 +78,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:visibility="@{vm.canAddTask ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_back" />
 
@@ -86,6 +89,7 @@
             android:layout_marginEnd="24dp"
             android:onClick="@{() -> vm.onClickAddTask()}"
             android:src="@drawable/ic_add_36"
+            android:visibility="@{vm.canAddTask ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_add_task"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_add_task" />
@@ -112,6 +116,35 @@
             app:layout_constraintTop_toBottomOf="@+id/v_divider"
             tools:itemCount="3"
             tools:listitem="@layout/view_tasks" />
+
+        <ImageView
+            android:id="@+id/iv_no_tasks"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_schedule_36"
+            android:visibility="@{vm.showNoTasksInfo ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_no_tasks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_divider"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_no_tasks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:gravity="center"
+            android:text="@string/no_tasks"
+            android:textStyle="italic"
+            android:visibility="@{vm.showNoTasksInfo ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_no_tasks"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

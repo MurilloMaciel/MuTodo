@@ -26,4 +26,7 @@ interface TaskDao {
 
     @Query("SELECT * FROM TaskData WHERE id = :id")
     suspend fun findById(id: Long): TaskData
+
+    @Query("SELECT COUNT(id) FROM TaskData WHERE categoryType = :categoryType")
+    suspend fun countByCategory(categoryType: String): Int
 }

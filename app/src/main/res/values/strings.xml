@@ -17,8 +17,11 @@
 
 <!--    categories-->
     <string name="welcome">Olá {name}</string>
-    <string name="all_tasks_remaining">{count} itens pendentes</string>
+    <string name="user">usuário</string>
+    <string name="all_tasks">{count} itens cadastrados</string>
+    <string name="no_task_remaining">nenhum item pendente</string>
     <string name="tasks_remaining">{count} tarefas</string>
+    <string name="no_tasks_remaining_into_category">nenhuma tarefa</string>
     <string name="all_category_title">Todas</string>
     <string name="work_category_title">Trabalho</string>
     <string name="studies_category_title">Estudos</string>
@@ -26,25 +29,23 @@
     <string name="fun_category_title">Diversão</string>
     <string name="personal_category_title">Pessoal</string>
     <string name="gym_category_title">Exercícios</string>
+    <string name="go_to_all_tasks">Ver tudo</string>
 
 <!--    task-->
     <string name="add_tasks">Adicionar tarefas</string>
     <string name="tasks_title">Tarefas</string>
     <string name="no_alarm_scheduled">Nenhum alarme agendado</string>
-<!--    <string name=""></string>-->
 
 <!--    add task-->
     <string name="add_task">Adicionar tarefa</string>
     <string name="add_task_title_hint">Título</string>
     <string name="add_task_description_hint">Descrição</string>
+    <string name="no_tasks">Nenhuma tarefa cadastrada…</string>
     <string name="add_task_submit">SALVAR</string>
     <string name="add_alarm_unchecked">Alarme desabilitado</string>
     <string name="add_alarm_checked">Alarme habilitado</string>
     <string name="alarm_repeat_initial_text">Sem repetição</string>
     <string name="alarm_repeat_all_days">Repetir todos os dias</string>
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
 
 <!--    settings-->
     <!--    <string name=""></string>-->

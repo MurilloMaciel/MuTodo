@@ -5,6 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.maciel.murillo.mutodo.R
+import com.maciel.murillo.mutodo.core.extensions.visibility
 import com.maciel.murillo.mutodo.core.helper.EventObserver
 import com.maciel.murillo.mutodo.core.presentation.base.BaseBindingFragment
 import com.maciel.murillo.mutodo.databinding.FragmentTasksBinding
@@ -73,7 +74,7 @@ class TasksFragment : BaseBindingFragment<FragmentTasksBinding>() {
 
     private fun setAddTaskObserver() {
         tasksViewModel.addOrUpdateTask.observe(viewLifecycleOwner, EventObserver { taskId ->
-            navController.navigate(TasksFragmentDirections.goToAddTaskFrag(taskCategoryType, taskId ?: -1L))
+            navController.navigate(TasksFragmentDirections.goToAddTaskFrag(taskCategoryType, taskId))
         })
     }
 }

@@ -91,7 +91,7 @@ class AddTaskViewModel(
         id = taskToEdit?.id.safe(),
         title = _taskTitle.value.safe(),
         description = _taskDescription.value.safe(),
-        categoryType = categoryType,
+        categoryType = taskToEdit?.categoryType ?: categoryType,
         alarm = getAlarmToUpdateTask(),
         insertingDate = Calendar.getInstance().toDateTimeString(),
     )

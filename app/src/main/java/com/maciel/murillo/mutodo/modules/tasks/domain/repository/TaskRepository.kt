@@ -18,4 +18,6 @@ interface TaskRepository {
     suspend fun findAllByCategory(categoryType: CategoryType): List<Task>
 
     suspend fun findById(id: Long): Task
+
+    suspend fun countByCategory(categoryType: CategoryType): Int
 }

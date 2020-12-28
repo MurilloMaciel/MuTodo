@@ -17,4 +17,6 @@ interface TaskLocalDatasource {
     suspend fun findAllByCategory(categoryType: String): List<TaskData>
 
     suspend fun findById(id: Long): TaskData
+
+    suspend fun countByCategory(categoryType: String): Int
 }
