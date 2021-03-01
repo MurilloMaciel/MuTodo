@@ -1,62 +1,62 @@
 <resources>
     <string name="app_name">MuTodo</string>
-    <string name="app_description">Gerenciamento de tarefas</string>
+    <string name="app_description">Task Manager</string>
     <string name="title_activity_main">MainActivity</string>
 
-    <string name="today">Hoje</string>
-    <string name="tomorrow">Amanhã</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
     <string name="pattern_month_day_short">dd \'de\' MMM</string>
     <string name="pattern_month_day_long">dd \'de\' MMMM</string>
 
     <!--    notification-->
     <string name="tasks_to_do">MuTodo</string>
-    <string name="most_recently_task">Tarefa mais recente:</string>
-    <string name="touch_to_check">Toque para visualizar</string>
-    <string name="notification_title_task_alarms">Tarefas</string>
-    <string name="new_task">Nova Tarefa</string>
+    <string name="most_recently_task">Most recent task:</string>
+    <string name="touch_to_check">Touch to See</string>
+    <string name="notification_title_task_alarms">Tasks</string>
+    <string name="new_task">New Task</string>
 
     <!--    categories-->
-    <string name="welcome">Olá {name}</string>
-    <string name="user">usuário</string>
-    <string name="all_tasks">{count} itens cadastrados</string>
-    <string name="no_task_remaining">nenhum item pendente</string>
-    <string name="tasks_remaining">{count} tarefas</string>
-    <string name="no_tasks_remaining_into_category">nenhuma tarefa</string>
-    <string name="all_category_title">Todas</string>
-    <string name="work_category_title">Trabalho</string>
-    <string name="studies_category_title">Estudos</string>
-    <string name="general_category_title">Gerais</string>
-    <string name="fun_category_title">Diversão</string>
-    <string name="personal_category_title">Pessoal</string>
-    <string name="gym_category_title">Exercícios</string>
-    <string name="go_to_all_tasks">Ver tudo</string>
+    <string name="welcome">Hello, {name}</string>
+    <string name="user">user</string>
+    <string name="all_tasks">{count} items</string>
+    <string name="no_task_remaining">No pending items</string>
+    <string name="tasks_remaining">{count} tasks</string>
+    <string name="no_tasks_remaining_into_category">no task</string>
+    <string name="all_category_title">All</string>
+    <string name="work_category_title">Work</string>
+    <string name="studies_category_title">Study</string>
+    <string name="general_category_title">General</string>
+    <string name="fun_category_title">Fun</string>
+    <string name="personal_category_title">Personal</string>
+    <string name="gym_category_title">Gym</string>
+    <string name="go_to_all_tasks">See all</string>
 
     <!--    task-->
-    <string name="add_tasks">Adicionar tarefas</string>
-    <string name="tasks_title">Tarefas</string>
-    <string name="no_alarm_scheduled">Nenhum alarme agendado</string>
+    <string name="add_tasks">Add task</string>
+    <string name="tasks_title">tasks</string>
+    <string name="no_alarm_scheduled">No scheduled alarms</string>
 
     <!--    add task-->
-    <string name="add_task">Adicionar tarefa</string>
-    <string name="add_task_title_hint">Título</string>
-    <string name="add_task_description_hint">Descrição</string>
-    <string name="no_tasks">Nenhuma tarefa cadastrada…</string>
-    <string name="add_task_submit">SALVAR</string>
-    <string name="add_alarm_unchecked">Alarme desabilitado</string>
-    <string name="add_alarm_checked">Alarme habilitado</string>
-    <string name="alarm_repeat_initial_text">Sem repetição</string>
-    <string name="alarm_repeat_all_days">Repetir todos os dias</string>
+    <string name="add_task">Add task</string>
+    <string name="add_task_title_hint">Title</string>
+    <string name="add_task_description_hint">Description</string>
+    <string name="no_tasks">No scheduled alarms…</string>
+    <string name="add_task_submit">SAVE</string>
+    <string name="add_alarm_unchecked">Alarm disabled</string>
+    <string name="add_alarm_checked">Alarm enabled</string>
+    <string name="alarm_repeat_initial_text">No repetition</string>
+    <string name="alarm_repeat_all_days">Repeat every day</string>
 
     <!--    settings-->
-    <string name="settings">Configurações</string>
-    <string name="user_name">Nome de usuário</string>
-    <string name="enable_vibration">Habilitar vibração</string>
+    <string name="settings">Settings</string>
+    <string name="user_name">User name</string>
+    <string name="enable_vibration">Enable vibration</string>
 
     <!--    about-->
-    <string name="about">Sobre</string>
-    <string name="about_description">O MuTudo é um aplicativo de gerenciamento de tarefas que vai te ajudar a se programar, nem que a vaca tussa.</string>
-    <string name="version">Versão</string>
-    <string name="developed_by">Desenvolvedor</string>
+    <string name="about">About</string>
+    <string name="about_description">MuTudo is a task management application that will help you to program yourself, even if the cow coughs.</string>
+    <string name="version">Version</string>
+    <string name="developed_by">Developer</string>
     <string name="developer">Murillo M. Maciel</string>
 
 </resources>
