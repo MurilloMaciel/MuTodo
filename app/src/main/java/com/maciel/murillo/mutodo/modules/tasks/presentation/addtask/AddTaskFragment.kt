@@ -7,8 +7,6 @@ import com.maciel.murillo.mutodo.core.extensions.getDateToString
 import com.maciel.murillo.mutodo.core.extensions.getTimeToString
 import com.maciel.murillo.mutodo.core.extensions.newTextWatcher
 import com.maciel.murillo.mutodo.core.helper.EventObserver
-import com.maciel.murillo.mutodo.core.helper.formatTimeWithAndroidFormat
-import com.maciel.murillo.mutodo.core.helper.getFullDateName
 import com.maciel.murillo.mutodo.core.presentation.base.BaseBindingFragment
 import com.maciel.murillo.mutodo.core.presentation.dialog.DateSelectorCallback
 import com.maciel.murillo.mutodo.core.presentation.dialog.DateSelectorDialog
@@ -17,8 +15,6 @@ import com.maciel.murillo.mutodo.core.presentation.dialog.TimeSelectorDialog
 import com.maciel.murillo.mutodo.databinding.FragmentAddTaskBinding
 import com.maciel.murillo.mutodo.modules.categories.presentation.model.CategoryTypePresentation
 import com.maciel.murillo.mutodo.modules.categories.presentation.model.mapToCategoryType
-import com.maciel.murillo.mutodo.modules.tasks.domain.model.Task
-import com.maciel.murillo.mutodo.modules.tasks.presentation.TasksFragmentArgs
 import kotlinx.android.synthetic.main.fragment_add_task.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*

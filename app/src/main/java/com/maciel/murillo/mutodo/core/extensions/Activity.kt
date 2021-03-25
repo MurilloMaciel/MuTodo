@@ -14,12 +14,6 @@ fun Activity?.setAsFullScreen() {
     window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 }
 
-//fun Activity.copyToClipboard(label: String, text: String) {
-//    (getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager)?.run {
-//        primaryClip = ClipData.newPlainText(label, text)
-//    }
-//}
-
 fun Activity.startActivityAndFinish(intent: Intent) {
     startActivity(intent)
     finish()
@@ -34,7 +28,3 @@ fun Activity?.setResultAndFinish(result: Int, intent: Intent? = null) {
 fun Activity.hideKeyboard() {
     if (currentFocus == null) View(this) else currentFocus?.let { hideKeyboard(it) }
 }
-
-//fun Activity.log(tag: String, log: String) {
-//    if (BuildConfig.DEBUG)
-//}

@@ -1,14 +1,11 @@
 package com.maciel.murillo.mutodo.modules.tasks.presentation.addtask
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maciel.murillo.mutodo.core.extensions.*
 import com.maciel.murillo.mutodo.core.helper.Event
-import com.maciel.murillo.mutodo.core.helper.formatTimeWithAndroidFormat
-import com.maciel.murillo.mutodo.core.helper.getFullDateName
 import com.maciel.murillo.mutodo.modules.categories.domain.model.CategoryType
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.Alarm
 import com.maciel.murillo.mutodo.modules.tasks.domain.model.RepeatType
